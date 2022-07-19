@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
     # third party
     'crispy_forms',
+    'taggit',
+    'taggit_templatetags2',
 ]
 
 MIDDLEWARE = [

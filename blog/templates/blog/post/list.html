@@ -6,20 +6,28 @@
     <div class="container d-md-flex align-items-stretch">
       <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5 pt-5">
-      {% for post in posts %}
-        <a href="{{ post.get_absolute_url }}"><h2 class="mb-1">{{ post.title}}</h2></a>
-        <p class="date" style="color: #ccc; font-family: Georgia,Serif; font-size: 12px; font-style: italic">Published {{ post.publish }} by {{ post.author }}</p>
-        {{ post.body|truncatewords:30|linebreaks }}
-      {% endfor %}
-      {% include 'pagination.html' with page=page_obj %}
+          {% if tag %}
+                <h2> Posts tagged with "{{ tag.name }}"</h2>
+            {% endif %}
+          {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}"><h2 class="mb-1">{{ post.title}}</h2></a>
+            <p class="date" style="color: #ccc; font-family: Georgia,Serif; font-size: 12px; font-style: italic">Published {{ post.publish }} by {{ post.author }}</p>
+            {{ post.body|truncatewords:30|linebreaks }}
+            {% for tag in post.tags.all %}
+                <a href="{% url 'post_list_by_tag' tag.slug %}"><span class="badge badge-primary">{{ tag.name }}</span></a>
+            {% endfor %}
+          <br>
+              <Br>
+          {% endfor %}
+          {% include 'pagination.html' with page=posts %}
       </div>
         <nav id="sidebar">
-				<div class="p-4 pt-5">
-					<h5>Categories</h5>
-	        <ul class="list-unstyled components mb-5">
-	          <li>
-	            <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mens Shoes</a>
-	            <ul class="collapse list-unstyled" id="pageSubmenu1">
+                <div class="p-4 pt-5">
+                    <h5>Categories</h5>
+            <ul class="list-unstyled components mb-5">
+              <li>
+                <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mens Shoes</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu1">
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Casual</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Football</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Jordan</a></li>
@@ -27,11 +35,11 @@
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Running</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Soccer</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Sports</a></li>
-	            </ul>
-	          </li>
-	          <li>
-	            <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mens Shoes</a>
-	            <ul class="collapse list-unstyled" id="pageSubmenu2">
+                </ul>
+              </li>
+              <li>
+                <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mens Shoes</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu2">
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Casual</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Football</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Jordan</a></li>
@@ -39,44 +47,40 @@
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Running</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Soccer</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Sports</a></li>
-	            </ul>
-	          </li>
-	          <li>
-	            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Accessories</a>
-	            <ul class="collapse list-unstyled" id="pageSubmenu3">
+                </ul>
+              </li>
+              <li>
+                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Accessories</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu3">
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Nicklace</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Ring</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Bag</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Sacks</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Lipstick</a></li>
-	            </ul>
-	          </li>
-	          <li>
-	            <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Clothes</a>
-	            <ul class="collapse list-unstyled" id="pageSubmenu4">
+                </ul>
+              </li>
+              <li>
+                <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Clothes</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu4">
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Jeans</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> T-shirt</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Jacket</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Shoes</a></li>
                 <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Sweater</a></li>
-	            </ul>
-	          </li>
-	        </ul>
-					<div class="mb-5">
-						<h5>Tag Cloud</h5>
-            <div class="tagcloud">
-              <a href="#" class="tag-cloud-link">dish</a>
-              <a href="#" class="tag-cloud-link">menu</a>
-              <a href="#" class="tag-cloud-link">food</a>
-              <a href="#" class="tag-cloud-link">sweet</a>
-              <a href="#" class="tag-cloud-link">tasty</a>
-              <a href="#" class="tag-cloud-link">delicious</a>
-              <a href="#" class="tag-cloud-link">desserts</a>
-              <a href="#" class="tag-cloud-link">drinks</a>
-            </div>
+                </ul>
+              </li>
+            </ul>
+            <div class="mb-5">
+                <h5>Tag Cloud</h5>
+                <div class="tagcloud">
+                    {% for tags in tags %}
+                        <a href="#">{{ tags.name }}</a>
+                    {% endfor %}
+
+                </div>
             </div>
 
-	      </div>
-    	</nav>
-		</div>
+          </div>
+        </nav>
+    </div>
 {% endblock %}
