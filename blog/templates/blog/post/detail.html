@@ -8,6 +8,10 @@
         <p style="color: #ccc; font-family: Georgia; font-size: 12px; font-style: italic">Published {{ post.publish }} by {{ post.author }}</p>
         {{ post.body|linebreaks }}
 
+        <p>
+            <a href="{% url "post_share" post.id %}">Share this post</a>
+        </p>
+
         <a href="{% url 'post_list' %}" class="btn btn-light">Back</a>
     </div>
 {% endblock %}
