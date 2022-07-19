@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{%  block content %}
+    <div class="container mt-5">
+        <h1>{{ post.title }}</h1>
+        <p style="color: #ccc; font-family: Georgia; font-size: 12px; font-style: italic">Published {{ post.publish }} by {{ post.author }}</p>
+        {{ post.body|linebreaks }}
+
+        <a href="{% url 'post_list' %}" class="btn btn-light">Back</a>
+    </div>
+{% endblock %}
