@@ -31,18 +31,18 @@
             </h2>
             <hr style="color: black">
         {% endwith %}
-        <div>
-            {%  if new_comment %}
-                <h2>Your comment has been added</h2>
-            {% else %}
-                <h2>Add a new comment</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ comment_form|crispy }}
-                    <input type="submit" value="Add Comnent" class="btn btn-primary">
-                </form>
-            {% endif %}
-        </div>
+{#        <div>#}
+{#            {%  if new_comment %}#}
+{#                <h2>Your comment has been added</h2>#}
+{#            {% else %}#}
+{#                <h2>Add a new comment</h2>#}
+{#                <form method="post">#}
+{#                    {% csrf_token %}#}
+{#                    {{ comment_form|crispy }}#}
+{#                    <input type="submit" value="Add Comnent" class="btn btn-primary">#}
+{#                </form>#}
+{#            {% endif %}#}
+{#        </div>#}
         <br>
     </div>
 
