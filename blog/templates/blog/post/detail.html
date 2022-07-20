@@ -1,19 +1,29 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
+{% load blog_tags %}
 
 {% block title %} {{ post.title }} {% endblock %}
 
 {%  block content %}
     <div class="container mt-5">
+        <a href="{% url 'post_list' %}" class="btn btn-light">Back</a>
+        <br>
         <h1>{{ post.title }}</h1>
         <p style="color: #ccc; font-family: Georgia; font-size: 12px; font-style: italic">Published {{ post.publish }} by {{ post.author }}</p>
-        {{ post.body|linebreaks }}
+        {{ post.body|markdown }}
 
         <p>
             <a href="{% url "post_share" post.id %}">Share this post</a>
         </p>
 
-        <a href="{% url 'post_list' %}" class="btn btn-light">Back</a>
+        <h2>Similar Posts</h2>
+        {% for post in similar_posts %}
+            <p>
+                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            </p>
+        {% empty %}
+            There are not similar posts
+        {% endfor %}
 
         {% with comments.count as total_comments %}
             <h2 class="mt-4">
